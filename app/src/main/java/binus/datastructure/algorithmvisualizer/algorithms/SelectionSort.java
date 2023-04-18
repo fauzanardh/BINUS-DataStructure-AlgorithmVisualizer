@@ -9,15 +9,15 @@ public class SelectionSort extends Algorithm {
         // Get last state
         ArrayList<Integer> lastState = lastStep.getCurrentState();
         Integer lastIndex = lastStep.getCurrentIndex();
-        
-        // Prepare for next state
-        ArrayList<Integer> nextState;
-        Integer nextIndex;
-        Pair<Integer, Integer> comparedElements;
-        Boolean isFinished;
 
         // Step through the algorithm once
         if (lastIndex < lastState.size()) {
+            // Prepare for next state
+            ArrayList<Integer> nextState;
+            Integer nextIndex;
+            Pair<Integer, Integer> comparedElements;
+            Boolean isFinished;
+
             Integer minIndex = lastIndex;
             // Search for the minimum value
             for (int i = lastIndex + 1; i < lastState.size(); i++) {
