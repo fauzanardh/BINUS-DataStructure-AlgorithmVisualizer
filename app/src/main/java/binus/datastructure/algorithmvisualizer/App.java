@@ -3,8 +3,36 @@
  */
 package binus.datastructure.algorithmvisualizer;
 
+import java.util.ArrayList;
+import org.javatuples.Pair;
+import binus.datastructure.algorithmvisualizer.algorithms.SelectionSort;
+
 public class App {
     public String getGreeting() {
+        DoublyLinkedList list = new DoublyLinkedList();
+
+        ArrayList<Integer> currentState = new ArrayList<Integer>();
+        currentState.add(2);
+        currentState.add(3);
+        currentState.add(1);
+        Pair<Integer, Integer> comparedElements = new Pair<Integer, Integer>(-1, -1);
+        Integer currentIndex = 0;
+        Boolean isFinished = false;
+
+        SortingContainer currentStep = new SortingContainer(currentState, comparedElements, currentIndex, isFinished, false);
+        list.addNode(currentStep);
+
+        SortingContainer nextStep = SelectionSort.step(currentStep);
+        list.addNode(nextStep);
+
+        SortingContainer nextNextStep = SelectionSort.step(nextStep);
+        list.addNode(nextNextStep);
+
+        SortingContainer lastStep = SelectionSort.step(nextNextStep);
+        list.addNode(lastStep);
+
+        list.display();
+
         return "Hello World!";
     }
 
