@@ -1,12 +1,10 @@
 package binus.datastructure.algorithmvisualizer.algorithms;
 
 import java.util.ArrayList;
-
 import org.javatuples.Pair;
-
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
-public class SelectionSort {
+public class SelectionSort extends Algorithm {
     public static SortingContainer step(SortingContainer lastStep) {
         // Get last state
         ArrayList<Integer> lastState = lastStep.getCurrentState();
@@ -34,15 +32,12 @@ public class SelectionSort {
                 Integer temp = nextState.get(minIndex);
                 nextState.set(minIndex, nextState.get(lastIndex));
                 nextState.set(lastIndex, temp);
-
-                isFinished = false;
-            } else {
-                isFinished = true;
             }
 
             // Set values for next step
             nextIndex = lastIndex + 1;
             comparedElements = new Pair<Integer, Integer>(lastIndex, minIndex);
+            isFinished = isFinished(nextState);
 
             return new SortingContainer(nextState, comparedElements, nextIndex, isFinished, true);
         }

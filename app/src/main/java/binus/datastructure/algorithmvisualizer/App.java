@@ -12,24 +12,25 @@ public class App {
         DoublyLinkedList list = new DoublyLinkedList();
 
         ArrayList<Integer> currentState = new ArrayList<Integer>();
-        currentState.add(2);
         currentState.add(3);
+        currentState.add(2);
+        currentState.add(4);
         currentState.add(1);
         Pair<Integer, Integer> comparedElements = new Pair<Integer, Integer>(-1, -1);
         Integer currentIndex = 0;
         Boolean isFinished = false;
 
-        SortingContainer currentStep = new SortingContainer(currentState, comparedElements, currentIndex, isFinished, false);
-        list.addNode(currentStep);
+        SortingContainer step0 = new SortingContainer(currentState, comparedElements, currentIndex, isFinished, false);
+        list.addNode(step0);
 
-        SortingContainer nextStep = SelectionSort.step(currentStep);
-        list.addNode(nextStep);
+        SortingContainer step1 = SelectionSort.step(step0);
+        list.addNode(step1);
 
-        SortingContainer nextNextStep = SelectionSort.step(nextStep);
-        list.addNode(nextNextStep);
+        SortingContainer step2 = SelectionSort.step(step1);
+        list.addNode(step2);
 
-        SortingContainer lastStep = SelectionSort.step(nextNextStep);
-        list.addNode(lastStep);
+        SortingContainer step3 = SelectionSort.step(step2);
+        list.addNode(step3);
 
         list.display();
 
