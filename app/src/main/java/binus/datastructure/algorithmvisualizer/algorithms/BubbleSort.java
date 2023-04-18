@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import org.javatuples.Pair;
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
-public class SelectionSort extends Algorithm {
+public class BubbleSort extends Algorithm {
     public static SortingContainer step(SortingContainer lastStep) {
         // Get last state
         ArrayList<Integer> lastState = lastStep.getCurrentState();
@@ -16,35 +16,31 @@ public class SelectionSort extends Algorithm {
             ArrayList<Integer> nextState;
             Integer nextIndex;
             Pair<Integer, Integer> comparedElements;
-            Boolean isSwapped = false;
             Boolean isFinished = false;
+            Boolean isSwapped = false;
 
-            Integer minIndex = lastIndex;
-            // Search for the minimum value
-            for (int i = lastIndex + 1; i < lastState.size(); i++) {
-                if (lastState.get(i) < lastState.get(minIndex)) {
-                    minIndex = i;
-                }
-            }
-            
             nextState = new ArrayList<Integer>(lastState);
-            if (minIndex != lastIndex) {
-                // Swap the minimum value with the current value;
-                Integer temp = nextState.get(minIndex);
-                nextState.set(minIndex, nextState.get(lastIndex));
-                nextState.set(lastIndex, temp);
+            // Swap adjacent elements if they are in decreasing order
+            if (lastState.get(lastIndex) > lastState.get(lastIndex + 1)) {
+                Integer temp = nextState.get(lastIndex);
+                nextState.set(lastIndex, nextState.get(lastIndex + 1));
+                nextState.set(lastIndex + 1, temp);
 
                 isSwapped = true;
             }
 
             // Set values for next step
             nextIndex = lastIndex + 1;
-            comparedElements = new Pair<Integer, Integer>(lastIndex, minIndex);
+            comparedElements = new Pair<Integer, Integer>(lastIndex, nextIndex);
             isFinished = isFinished(nextState);
 
             return new SortingContainer(lastState, nextState, comparedElements, nextIndex, isSwapped, isFinished, true);
+        } else if (!lastStep.getIsFinished()) {
+            // Resets the index and start over if the list is not sorted yet
+            lastStep.setCurrentIndex(0);
+            return step(lastStep);
+        } else {
+            return lastStep;
         }
-
-        return lastStep;
     }
 }
