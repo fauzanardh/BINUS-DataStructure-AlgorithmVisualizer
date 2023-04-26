@@ -29,7 +29,7 @@ public class SortingModel {
         return this.data;
     }
 
-    public Boolean isFinished() {
+    public Boolean isFinished() throws NullPointerException {
         // Check if the data has tail
         if (this.data.getTail() == null) {
             throw new NullPointerException("The data is empty, initialize the sorting elements first!");
@@ -43,7 +43,7 @@ public class SortingModel {
     }
 
     // Perform a single step of the sorting algorithm
-    public void step(String algorithm) {
+    public void step(String algorithm) throws NullPointerException {
         // Check if the data has tail
         if (this.data.getTail() == null) {
             throw new NullPointerException("The data is empty, initialize the sorting elements first!");
