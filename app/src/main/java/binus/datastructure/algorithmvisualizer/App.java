@@ -4,34 +4,40 @@
 package binus.datastructure.algorithmvisualizer;
 
 import java.util.ArrayList;
-import org.javatuples.Pair;
-import binus.datastructure.algorithmvisualizer.algorithms.BubbleSort;
+
+import binus.datastructure.algorithmvisualizer.models.SortingModel;
 
 public class App {
-    public String getGreeting() {
-        DoublyLinkedList list = new DoublyLinkedList();
+    public String doSort() {
+        // Initialize the sorting model
+        SortingModel sortingModel = new SortingModel();
 
-        ArrayList<Integer> currentState = new ArrayList<Integer>();
-        currentState.add(3);
-        currentState.add(2);
-        currentState.add(4);
-        currentState.add(1);
-        Pair<Integer, Integer> comparedElements = new Pair<Integer, Integer>(-1, -1);
+        // Initialize the sorting elements
+        // sortingModel.initializeModelRandom(5);
 
-        SortingContainer currentStep = new SortingContainer(currentState, currentState, comparedElements, 0, false, false, false);
-        list.addNode(currentStep);
-        
-        while (!currentStep.getIsFinished()) {
-            currentStep = BubbleSort.step(currentStep);
-            list.addNode(currentStep);
+        // Initialize the sorting elements
+        sortingModel.initializeModel(new ArrayList<>() {
+            {
+                add(4);
+                add(0);
+                add(1);
+                add(3);
+                add(3);
+            }
+        });
+
+        // Perform sorting until finished
+        while (!sortingModel.isFinished()) {
+            sortingModel.step("bubble_sort");
         }
 
-        list.display();
+        // Print the result
+        sortingModel.getData().display();
 
-        return "Hello World!";
+        return "Finished";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        System.out.println(new App().doSort());
     }
 }

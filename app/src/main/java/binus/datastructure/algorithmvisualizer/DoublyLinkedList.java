@@ -1,13 +1,25 @@
 package binus.datastructure.algorithmvisualizer;
 
 public class DoublyLinkedList {
-    class Node {
+    public class Node {
         SortingContainer item;
         Node prev;
         Node next;
     
         public Node(SortingContainer item) {
             this.item = item;
+        }
+
+        public SortingContainer getItem() {
+            return item;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public Node getPrev() {
+            return prev;
         }
     }
 
@@ -33,6 +45,14 @@ public class DoublyLinkedList {
             // newNode becomes new tail
             tail = newNode;
         }
+    }
+
+    public Node getHead() {
+        return head;
+    }
+
+    public Node getTail() {
+        return tail;
     }
 
     public void display() {
