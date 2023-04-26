@@ -5,6 +5,7 @@ import org.javatuples.Pair;
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
 public class SelectionSort extends Algorithm {
+    @Override
     public SortingContainer step(SortingContainer lastStep) {
         // Get last state
         ArrayList<Integer> lastState = lastStep.getCurrentState();
