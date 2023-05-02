@@ -6,6 +6,7 @@ package binus.datastructure.algorithmvisualizer;
 import java.util.ArrayList;
 
 import binus.datastructure.algorithmvisualizer.models.SortingModel;
+import binus.datastructure.algorithmvisualizer.views.AlgorithmVisualizer;
 
 public class App {
     public String doSort() {
@@ -27,8 +28,12 @@ public class App {
         });
 
         // Perform sorting until finished
-        while (!sortingModel.isFinished()) {
-            sortingModel.step("bubble_sort");
+        try {
+            while (!sortingModel.isFinished()) {
+                sortingModel.step("bubble_sort");
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
         }
 
         // Print the result
@@ -37,7 +42,14 @@ public class App {
         return "Finished";
     }
 
+    public String launchApplication(String[] args){
+        // Launch the JavaFX application
+        AlgorithmVisualizer.main(args);
+
+        return "Finished";
+    }
+
     public static void main(String[] args) {
-        System.out.println(new App().doSort());
+        System.out.println(new App().launchApplication(args));
     }
 }
