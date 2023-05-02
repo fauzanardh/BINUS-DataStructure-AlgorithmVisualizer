@@ -2,6 +2,7 @@ package binus.datastructure.algorithmvisualizer.algorithms;
 
 import java.util.ArrayList;
 import org.javatuples.Pair;
+
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
 public class SelectionSort extends Algorithm {

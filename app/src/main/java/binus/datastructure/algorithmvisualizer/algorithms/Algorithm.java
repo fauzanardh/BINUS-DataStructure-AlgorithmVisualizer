@@ -2,6 +2,7 @@ package binus.datastructure.algorithmvisualizer.algorithms;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;
+
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
 public abstract class Algorithm {

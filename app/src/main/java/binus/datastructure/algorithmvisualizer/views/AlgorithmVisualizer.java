@@ -1,7 +1,5 @@
 package binus.datastructure.algorithmvisualizer.views;
 
-import binus.datastructure.algorithmvisualizer.MFXAppResourcesLoader;
-import binus.datastructure.algorithmvisualizer.controllers.AlgorithmVisualizerControllers;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +11,9 @@ import javafx.stage.StageStyle;
 import fr.brouillard.oss.cssfx.CSSFX;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
 import io.github.palexdev.materialfx.css.themes.Themes;
+
+import binus.datastructure.algorithmvisualizer.MFXAppResourcesLoader;
+import binus.datastructure.algorithmvisualizer.controllers.AlgorithmVisualizerControllers;
 
 public class AlgorithmVisualizer extends Application {
     @Override
