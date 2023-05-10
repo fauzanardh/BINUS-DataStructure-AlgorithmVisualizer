@@ -1,27 +1,23 @@
 package binus.datastructure.algorithmvisualizer.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
+import binus.datastructure.algorithmvisualizer.models.SortingModel;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXIconWrapper;
-import io.github.palexdev.materialfx.controls.MFXRectangleToggleNode;
-import io.github.palexdev.materialfx.controls.MFXScrollPane;
-import io.github.palexdev.materialfx.utils.ScrollUtils;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.base.MFXCombo;
 import io.github.palexdev.materialfx.utils.ToggleButtonsUtil;
-import io.github.palexdev.materialfx.utils.others.loader.MFXLoader;
 import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
 
 public class AlgorithmVisualizerControllers implements Initializable {
@@ -29,6 +25,9 @@ public class AlgorithmVisualizerControllers implements Initializable {
     private double xOffset;
     private double yOffset;
     private final ToggleGroup toggleGroup;
+
+    @FXML
+    private AnchorPane rootPane;
 
     @FXML
     private HBox windowHeader;
@@ -43,28 +42,32 @@ public class AlgorithmVisualizerControllers implements Initializable {
     private MFXFontIcon closeIcon;
 
     @FXML
-    private AnchorPane rootPane;
-
-    @FXML
-    private MFXScrollPane scrollPane;
-
-    @FXML
-    private VBox navBar;
-
-    @FXML
     private StackPane contentPane;
 
     @FXML
-    private StackPane logoContainer;
+    private MFXCombo<String> algorithmSelector;
+
+    @FXML
+    private StackPane randomizeButtonContainer;
+
+    @FXML
+    private MFXTextField inputData;
+
+    @FXML
+    private MFXButton runVisualizer;
+
+    private Double canvasWidth;
+    private Double canvasHeight;
 
     public AlgorithmVisualizerControllers(Stage stage) {
-		this.stage = stage;
-		this.toggleGroup = new ToggleGroup();
-		ToggleButtonsUtil.addAlwaysOneSelectedSupport(toggleGroup);
-	}
+        this.stage = stage;
+        this.toggleGroup = new ToggleGroup();
+        ToggleButtonsUtil.addAlwaysOneSelectedSupport(toggleGroup);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Setup the window header
         closeIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> Platform.exit());
         minimizeIcon.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 event -> ((Stage) rootPane.getScene().getWindow()).setIconified(true));
@@ -82,72 +85,28 @@ public class AlgorithmVisualizerControllers implements Initializable {
             stage.setY(event.getScreenY() + yOffset);
         });
 
-        initializeLoader();
+        // Create the randomize button with icon since it can't be done in FXML
+        MFXIconWrapper randomizeIconWrapper = new MFXIconWrapper("fas-rotate", 20, 28);
+        MFXButton randomizeButton = new MFXButton("", randomizeIconWrapper);
+        randomizeButton.setId("randomize-button");
+        randomizeButtonContainer.getChildren().add(randomizeButton);
 
-        ScrollUtils.addSmoothScrolling(scrollPane);
-    }
-
-    private void initializeLoader() {
-        MFXLoader loader = new MFXLoader();
-        // loader.addView(MFXLoaderBean.of("BUTTONS", loadURL("fxml/Buttons.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-circle-dot", "Buttons")).setDefaultRoot(true).get());
-        // loader.addView(MFXLoaderBean.of("CHECKS_RADIOS_TOGGLES", loadURL("fxml/ChecksRadiosToggles.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-toggle-on", "Checks, Radios, Toggles")).get());
-        // loader.addView(MFXLoaderBean.of("COMBOS", loadURL("fxml/ComboBoxes.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-square-caret-down", "ComboBoxes")).get());
-        // loader.addView(MFXLoaderBean.of("DIALOGS", loadURL("fxml/Dialogs.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-comments", "Dialogs"))
-        //         .setControllerFactory(c -> new DialogsController(stage)).get());
-        // loader.addView(MFXLoaderBean.of("TEXT-FIELDS", loadURL("fxml/TextFields.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-italic", "Fields")).get());
-        // loader.addView(MFXLoaderBean.of("LISTS", loadURL("fxml/ListViews.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-rectangle-list", "Lists")).get());
-        // loader.addView(MFXLoaderBean.of("NOTIFICATIONS", loadURL("fxml/Notifications.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-bell", "Notifications"))
-        //         .setControllerFactory(c -> new NotificationsController(stage)).get());
-        // loader.addView(MFXLoaderBean.of("PICKERS", loadURL("fxml/Pickers.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-calendar", "Pickers")).get());
-        // loader.addView(MFXLoaderBean.of("PROGRESS", loadURL("fxml/Progress.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-bars-progress", "Progress")).get());
-        // loader.addView(MFXLoaderBean.of("SCROLL-PANES", loadURL("fxml/ScrollPanes.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-bars-progress", "Scroll Panes", 90)).get());
-        // loader.addView(MFXLoaderBean.of("SLIDERS", loadURL("fxml/Sliders.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-sliders", "Sliders")).get());
-        // loader.addView(MFXLoaderBean.of("STEPPER", loadURL("fxml/Stepper.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-stairs", "Stepper")).get());
-        // loader.addView(MFXLoaderBean.of("TABLES", loadURL("fxml/TableViews.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-table", "Tables")).get());
-        // loader.addView(MFXLoaderBean.of("FONT-RESOURCES", loadURL("fxml/FontResources.fxml"))
-        //         .setBeanToNodeMapper(() -> createToggle("fas-icons", "Font Resources")).get());
-        loader.setOnLoadedAction(beans -> {
-            List<ToggleButton> nodes = beans.stream()
-                    .map(bean -> {
-                        ToggleButton toggle = (ToggleButton) bean.getBeanToNodeMapper().get();
-                        toggle.setOnAction(event -> contentPane.getChildren().setAll(bean.getRoot()));
-                        if (bean.isDefaultView()) {
-                            contentPane.getChildren().setAll(bean.getRoot());
-                            toggle.setSelected(true);
-                        }
-                        return toggle;
-                    })
-                    .toList();
-            navBar.getChildren().setAll(nodes);
+        // Setup canvas container
+        // Setup listener for canvas container size
+        contentPane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            canvasWidth = newValue.doubleValue();
+            System.out.println("Width: " + canvasWidth);
         });
-        loader.start();
-    }
+        contentPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            canvasHeight = newValue.doubleValue();
+            System.out.println("Height: " + canvasHeight);
+        });
 
-    private ToggleButton createToggle(String icon, String text) {
-        return createToggle(icon, text, 0);
-    }
-
-    private ToggleButton createToggle(String icon, String text, double rotate) {
-        MFXIconWrapper wrapper = new MFXIconWrapper(icon, 24, 32);
-        MFXRectangleToggleNode toggleNode = new MFXRectangleToggleNode(text, wrapper);
-        toggleNode.setAlignment(Pos.CENTER_LEFT);
-        toggleNode.setMaxWidth(Double.MAX_VALUE);
-        toggleNode.setToggleGroup(toggleGroup);
-        if (rotate != 0)
-            wrapper.getIcon().setRotate(rotate);
-        return toggleNode;
+        // Setup algorithm selector
+        // Create sorting model
+        SortingModel sortingModel = new SortingModel();
+        
+        // Add sorting algorithms to the selector
+        algorithmSelector.getItems().addAll(sortingModel.getSortingAlgorithms());
     }
 }

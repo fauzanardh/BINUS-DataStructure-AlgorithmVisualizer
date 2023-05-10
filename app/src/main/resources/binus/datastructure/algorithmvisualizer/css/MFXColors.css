@@ -1,18 +1,25 @@
 * {
-	-mfx-blue: #2196f3;
-	-mfx-charcoal: #445055;
-	-mfx-green: #4caf50;
-	-mfx-onyx: #353935;
-	-mfx-orange: #ff9800;
-	-mfx-purple: #7a0ed9;
-	-mfx-red: #EF6E6B;
-	-mfx-yellow: #FFEA00;
+	/* Catppuccin color scheme */
+	-mfx-red: #f38ba8;
+	-mfx-yellow: #f9e2af;
+	-mfx-green: #a6e3a1;
+	-mfx-sky: #91d7e3;
+
+	-mfx-surface0: #313244;
+	-mfx-surface1: #45475a;
+	-mfx-surface2: #585b70;
+	-mfx-surface2-transparent: #585b7060; 
+
+	-mfx-crust: #232634;
+	-mfx-mantle: #181825;
+	-mfx-base: #1e1e2e;
+	-mfx-text: #cdd6f4;
+	-mfx-text-dark: #4c4f69;
+	-mfx-subtext0: #a6adc8;
+	-mfx-subtext1: #bac2de;
 
 
-	-mfx-text-he: rgba(0, 0, 0, 0.87); /* High Emphasis */
-	-mfx-text-me: rgba(0, 0, 0, 0.60); /* Medium Emphasis*/
-	-mfx-text-disabled: rgba(0, 0, 0, 0.38); /* Disabled */
-
-	-common-gradient: linear-gradient(to right bottom, #c4008b, #d00085, #dc007f, #e60b79, #ef1872, #f5276b, #fa3564, #fe415e, #ff5158, #ff5f52, #ff6c4e, #ff794b);
-	-secondary-gradient: linear-gradient(to right bottom, #1ec400, #00bd3a, #00b654, #00ae67, #00a574, #00a280, #009e8a, #009a91, #009b9d, #009ba8, #009bb2, #009abb);
+	-mfx-text-he: -mfx-text; /* High Emphasis */
+	-mfx-text-me: -mfx-subtext1; /* Medium Emphasis*/
+	-mfx-text-disabled: -mfx-subtext0; /* Disabled */
 }

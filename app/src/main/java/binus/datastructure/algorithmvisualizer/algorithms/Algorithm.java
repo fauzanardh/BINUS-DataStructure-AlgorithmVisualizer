@@ -6,6 +6,9 @@ import java.util.stream.IntStream;
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
 public abstract class Algorithm {
+    public static final String ALGORITHM_NAME = "";
+    public static final String ALGORITHM_KEY = "";
+
     public SortingContainer step(SortingContainer lastStep) {
         throw new UnsupportedOperationException("This algorithm is not implemented yet.");
     }

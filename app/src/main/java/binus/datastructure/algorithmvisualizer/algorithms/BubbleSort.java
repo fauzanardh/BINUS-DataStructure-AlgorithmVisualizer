@@ -6,6 +6,9 @@ import org.javatuples.Pair;
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
 public class BubbleSort extends Algorithm {
+    public static final String ALGORITHM_NAME = "Bubble Sort";
+    public static final String ALGORITHM_KEY = "bubble_sort";
+
     @Override
     public SortingContainer step(SortingContainer lastStep) {
         // Get last state

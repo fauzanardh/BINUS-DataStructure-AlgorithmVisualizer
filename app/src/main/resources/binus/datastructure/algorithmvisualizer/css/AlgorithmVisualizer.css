@@ -4,119 +4,119 @@
   * Root
  **************************************************/
 .rootPane {
-  -fx-background-color: white;
+  -fx-background-color: -mfx-base;
   -fx-background-radius: 10;
-  -fx-border-color: #ebebeb;
+  /* -fx-border-color: #ebebeb; */
   -fx-border-radius: 10;
 }
 
 /**************************************************
   * Window Header
  **************************************************/
+.rootPane .navbar {
+  -fx-background-color: -mfx-crust;
+}
+
 .rootPane .close-icon {
   -mfx-color: -mfx-red;
-  -fx-opacity: 0.5;
+  -fx-opacity: 1;
 }
 
 .rootPane .close-icon:hover {
-  -fx-opacity: 1;
+  -fx-opacity: 0.8;
 }
 
 .rootPane .minimize-icon {
-  -mfx-color: #ffbf37;
-  -fx-opacity: 0.5;
+  -mfx-color: -mfx-yellow;
+  -fx-opacity: 1;
 }
 
 .rootPane .minimize-icon:hover {
-  -fx-opacity: 1;
+  -fx-opacity: 0.8;
 }
 
 .rootPane .maximize-icon {
-  -mfx-color: -mfx-purple;
-  -fx-opacity: 0.5;
+  -mfx-color: -mfx-green;
+  -fx-opacity: 1;
 }
 
 .rootPane .maximize-icon:hover {
-  -fx-opacity: 1;
+  -fx-opacity: 0.8;
 }
 
 /**************************************************
   * Sidebar
  **************************************************/
 .rootPane .sidebar {
-  -fx-background-color: -mfx-purple;
+  -fx-background-color: -mfx-surface0;
+  /* -fx-background-radius: 0 20 20 0; */
   -fx-background-insets: -1 -5 -1 -1;
 }
 
 .rootPane .sidebar .header {
-  -fx-font-family: "Visby Round CF Heavy";
-  -fx-font-size: 24;
-  -fx-text-fill: white;
+  -fx-font-family: "Open Sans ExtraBold";
+  -fx-font-size: 20;
+  -fx-text-fill: -mfx-text;
 }
 
-.rootPane .sidebar .header .mfx-font-icon {
-  -mfx-color: white;
+.rootPane .sidebar .tagline {
+  -fx-font-family: "Open Sans Bold";
+  -fx-font-size: 12;
+  -fx-text-fill: -mfx-subtext0;
 }
 
-.rootPane .sidebar .mfx-scroll-pane {
-  -fx-background-color: transparent;
-
-  -track-color: rgba(255, 255, 255, 0.3);
-  -thumb-color: white;
-  -thumb-hover-color: white;
-}
-
-.rootPane .sidebar .menu-label {
-  -fx-font-family: "Visby Round CF Bold";
+.rootPane .sidebar .header1 {
+  -fx-font-family: "Open Sans ExtraBold";
   -fx-font-size: 14;
-  -fx-text-fill: white;
+  -fx-text-fill: -mfx-text;
 }
 
-.rootPane .sidebar .navbar .mfx-rectangle-toggle-node {
+#algorithm-selector {
   -fx-background-color: transparent;
-  -fx-background-radius: 0;
-  -fx-border-color: transparent;
-  -fx-border-radius: 0;
-  -fx-pref-height: 40;
-
-  -fx-font-family: "Visby Round CF Demi Bold";
-  -fx-font-size: 13;
-  -fx-text-fill: white;
+  -fx-border-color: -mfx-sky;
+  -fx-text-fill: -mfx-text;
 }
 
-.rootPane .sidebar .navbar .mfx-rectangle-toggle-node .mfx-ripple-generator {
-  -mfx-paused: true;
+#algorithm-selector .floating-text {
+  -fx-background-color: transparent;
+	-fx-text-fill: -mfx-text;
 }
 
-.rootPane
-  .sidebar
-  .navbar
-  .mfx-rectangle-toggle-node
-  .mfx-icon-wrapper
-  .mfx-font-icon {
-  -mfx-color: white;
+#algorithm-selector .combo-popup .virtual-flow {
+  -fx-background-color: -mfx-surface0;
+  -fx-border-color: -mfx-sky;
+  -fx-text-fill: -mfx-text;
 }
 
-.rootPane .sidebar .navbar .mfx-rectangle-toggle-node:selected {
-  -fx-background-color: white;
-  -fx-background-radius: 5;
-  -fx-text-fill: #601cbe;
+#algorithm-selector .combo-popup .virtual-flow .mfx-combo-box-cell:hover {
+  -fx-background-color: -mfx-surface2-transparent;
 }
 
-.rootPane
-  .sidebar
-  .navbar
-  .mfx-rectangle-toggle-node:selected
-  .selection-rectangle {
-  -fx-stroke: transparent;
-  -fx-fill: #601cbe;
+#algorithm-selector .caret .mfx-font-icon {
+	-mfx-color: -mfx-text;
 }
 
-.rootPane
-  .sidebar
-  .navbar
-  .mfx-rectangle-toggle-node:selected
-  .mfx-icon-wrapper
-  .mfx-font-icon {
-  -mfx-color: #601cbe;
+#input-data {
+  -fx-background-color: transparent;
+	-fx-border-color: -mfx-sky;
+  -fx-text-fill: -mfx-text;
+}
+
+#input-data .floating-text {
+  -fx-background-color: -mfx-surface0;
+	-fx-text-fill: -mfx-text;
+}
+
+#run-button {
+	-fx-background-color: -mfx-sky;
+  -fx-text-fill: -mfx-text-dark;
+  -fx-font-family: "Open Sans Bold";
+  -fx-font-size: 14;
+}
+
+#randomize-button {
+	-fx-background-color: -mfx-sky;
+  -fx-text-fill: -mfx-text-dark;
+  -fx-font-family: "Open Sans Bold";
+  -fx-font-size: 14;
 }

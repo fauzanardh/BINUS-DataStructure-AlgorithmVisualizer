@@ -14,10 +14,16 @@ import binus.datastructure.algorithmvisualizer.algorithms.SelectionSort;
 
 public class SortingModel {
     private DoublyLinkedList data;
-    private HashMap<String, Algorithm> algorithms = new HashMap<>() {
+    private final HashMap<String, Algorithm> algorithms = new HashMap<>() {
         {
-            put("bubble_sort", new BubbleSort());
-            put("selection_sort", new SelectionSort());
+            put(BubbleSort.ALGORITHM_KEY, new BubbleSort());
+            put(SelectionSort.ALGORITHM_KEY, new SelectionSort());
+        }
+    };
+    public final HashMap<String, String> algorithmNameToKey = new HashMap<>() {
+        {
+            put(BubbleSort.ALGORITHM_NAME, BubbleSort.ALGORITHM_KEY);
+            put(SelectionSort.ALGORITHM_NAME, SelectionSort.ALGORITHM_KEY);
         }
     };
 
@@ -27,6 +33,10 @@ public class SortingModel {
 
     public DoublyLinkedList getData() {
         return this.data;
+    }
+
+    public ArrayList<String> getSortingAlgorithms() {
+        return new ArrayList<String>(this.algorithmNameToKey.keySet());
     }
 
     public Boolean isFinished() throws NullPointerException {
