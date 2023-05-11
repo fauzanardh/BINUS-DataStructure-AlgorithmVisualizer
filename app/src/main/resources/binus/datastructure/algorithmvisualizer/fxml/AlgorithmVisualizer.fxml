@@ -56,5 +56,5 @@
          </VBox.margin>
       </VBox>
     </VBox>
-    <StackPane fx:id="contentPane" layoutX="252.0" layoutY="52.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="265.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
+   <AnchorPane fx:id="contentPane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="265.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
 </AnchorPane>

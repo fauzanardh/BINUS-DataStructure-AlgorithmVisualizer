@@ -107,6 +107,17 @@
 	-fx-text-fill: -mfx-text;
 }
 
+#input-data-sorting-window {
+  -fx-background-color: transparent;
+	-fx-border-color: -mfx-sky;
+  -fx-text-fill: -mfx-text;
+}
+
+#input-data-sorting-window .floating-text {
+  -fx-background-color: -mfx-base;
+	-fx-text-fill: -mfx-text;
+}
+
 #run-button {
 	-fx-background-color: -mfx-sky;
   -fx-text-fill: -mfx-text-dark;
@@ -114,9 +125,13 @@
   -fx-font-size: 14;
 }
 
-#randomize-button {
-	-fx-background-color: -mfx-sky;
+#default-button {
+  -fx-background-color: -mfx-sky;
   -fx-text-fill: -mfx-text-dark;
   -fx-font-family: "Open Sans Bold";
-  -fx-font-size: 14;
+  -fx-font-size: 12;
+}
+
+#sorting-progress .bar1 {
+  -fx-fill: -mfx-sky;
 }
