@@ -2,11 +2,11 @@ package binus.datastructure.algorithmvisualizer;
 
 import java.util.ArrayList;
 
-import org.javatuples.Pair;
+import javafx.util.Pair;
 
 public class SortingContainer {
-    private ArrayList<Integer> lastState;
     private ArrayList<Integer> currentState;
+    private ArrayList<Integer> nextState;
     private Pair<Integer, Integer> comparedElements;
     private Integer currentIndex;
     private String algorithm;
@@ -17,8 +17,8 @@ public class SortingContainer {
     private Boolean started;
 
     public SortingContainer(
-            ArrayList<Integer> lastState,
             ArrayList<Integer> currentState,
+            ArrayList<Integer> nextState,
             Pair<Integer, Integer> comparedElements,
             Integer currentIndex,
             String algorithm,
@@ -27,8 +27,8 @@ public class SortingContainer {
             Boolean isSwapped,
             Boolean isFinished,
             Boolean started) {
-        this.lastState = lastState;
         this.currentState = currentState;
+        this.nextState = nextState;
         this.comparedElements = comparedElements;
         this.currentIndex = currentIndex;
         this.algorithm = algorithm;
@@ -43,12 +43,24 @@ public class SortingContainer {
         return this.currentState;
     }
 
+    public ArrayList<Integer> getNextState() {
+        return this.nextState;
+    }
+
+    public Pair<Integer, Integer> getComparedElements() {
+        return this.comparedElements;
+    }
+
     public Integer getCurrentIndex() {
         return this.currentIndex;
     }
 
     public void setCurrentIndex(Integer index) {
         this.currentIndex = index;
+    }
+
+    public String getAlgorithm() {
+        return this.algorithm;
     }
 
     public Integer getTotalComparison() {
@@ -59,6 +71,10 @@ public class SortingContainer {
         return this.totalSwap;
     }
 
+    public Boolean getIsSwapped() {
+        return this.isSwapped;
+    }
+
     public Boolean getIsFinished() {
         return this.isFinished;
     }
@@ -66,8 +82,8 @@ public class SortingContainer {
     public String toString() {
         return String.format(
                 "lastState: %s, currentState: %s, comparedElements: %s, currentIndex: %s, algorithm: %s, totalComparison: %s, totalSwap: %s, isSwapped: %s, isFinished: %s, started: %s",
-                this.lastState.toString(),
                 this.currentState.toString(),
+                this.nextState.toString(),
                 this.comparedElements.toString(),
                 this.currentIndex.toString(),
                 this.algorithm,

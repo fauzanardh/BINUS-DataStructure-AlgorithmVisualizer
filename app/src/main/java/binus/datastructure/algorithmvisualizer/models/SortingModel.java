@@ -2,9 +2,8 @@ package binus.datastructure.algorithmvisualizer.models;
 
 import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
-import org.javatuples.Pair;
+import javafx.util.Pair;
 
 import binus.datastructure.algorithmvisualizer.DoublyLinkedList;
 import binus.datastructure.algorithmvisualizer.SortingContainer;
@@ -91,22 +90,31 @@ public class SortingModel {
         this.data.addNode(currentStep);
     }
 
-    public void initializeModelRandom(Integer size) {
-        // Reset the data
-        this.reset();
-
-        // Generate a random array
-        ArrayList<Integer> currentState = new ArrayList<Integer>();
-        for (int i = 0; i < size; i++) {
-            currentState.add(ThreadLocalRandom.current().nextInt(0, size + 1));
+    public void runAlgorithmFully(String algorithmKey) {
+        try {
+            while (!isFinished()) {
+                step(algorithmKey);
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
         }
 
-        // Create a new step
-        Pair<Integer, Integer> comparedElements = new Pair<Integer, Integer>(-1, -1);
-        SortingContainer currentStep = new SortingContainer(currentState, currentState, comparedElements, 0,
-                "no_algorithm", 0, 0, false, false, false);
+        // Add the last step to the data
+        // because the last step is not added when the algorithm is finished
+        SortingContainer currenSortingContainer = this.data.getTail().getItem();
+        SortingContainer lastStep = new SortingContainer(
+                currenSortingContainer.getNextState(),
+                currenSortingContainer.getNextState(),
+                new Pair<>(-1, -1),
+                currenSortingContainer.getCurrentIndex() + 1,
+                currenSortingContainer.getAlgorithm(),
+                currenSortingContainer.getTotalComparison(),
+                currenSortingContainer.getTotalSwap(),
+                currenSortingContainer.getIsFinished(),
+                currenSortingContainer.getIsSwapped(),
+                true);
+        this.data.addNode(lastStep);
 
-        // Add the new step to the data
-        this.data.addNode(currentStep);
+        System.out.println(this.data.getTail().getItem());
     }
 }

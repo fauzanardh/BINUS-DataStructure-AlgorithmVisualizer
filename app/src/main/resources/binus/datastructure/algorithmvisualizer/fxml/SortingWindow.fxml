@@ -4,12 +4,13 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" stylesheets="@../css/AlgorithmVisualizer.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="binus.datastructure.algorithmvisualizer.controllers.SortingWindowControllers">
    <children>
-      <AnchorPane fx:id="sortingCanvasContainer" />
+      <BorderPane fx:id="sortingCanvasContainer" />
       <VBox alignment="CENTER" prefHeight="100.0" spacing="10.0">
          <children>
             <MFXProgressBar id="sorting-progress" fx:id="sortingProgress" progress="0.0">

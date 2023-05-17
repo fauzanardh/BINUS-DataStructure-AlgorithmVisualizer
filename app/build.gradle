@@ -29,9 +29,6 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
 
-    // https://mvnrepository.com/artifact/org.javatuples/javatuples
-    implementation 'org.javatuples:javatuples:1.2'
-
     // MaterialFX
     implementation 'io.github.palexdev:materialfx:11.16.1'
     implementation("fr.brouillard.oss:cssfx:11.5.1") { exclude group: 'org.openjfx' }

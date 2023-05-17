@@ -1,22 +1,23 @@
 package binus.datastructure.algorithmvisualizer.algorithms;
 
 import java.util.ArrayList;
-import org.javatuples.Pair;
+
+import javafx.util.Pair;
 
 import binus.datastructure.algorithmvisualizer.SortingContainer;
 
 public class SelectionSort extends Algorithm {
     public static final String ALGORITHM_NAME = "Selection Sort";
-    public static final String ALGORITHM_KEY = "bubble_sort";
+    public static final String ALGORITHM_KEY = "selection_sort";
 
     @Override
     public SortingContainer step(SortingContainer lastStep) {
         // Get last state
-        ArrayList<Integer> lastState = lastStep.getCurrentState();
+        ArrayList<Integer> currentState = lastStep.getNextState();
         Integer lastIndex = lastStep.getCurrentIndex();
 
         // Step through the algorithm once
-        if (lastIndex < (lastState.size() - 1)) {
+        if (lastIndex < (currentState.size() - 1)) {
             // Prepare for next state
             ArrayList<Integer> nextState;
             Integer nextIndex;
@@ -28,17 +29,17 @@ public class SelectionSort extends Algorithm {
 
             Integer minIndex = lastIndex;
             // Search for the minimum value
-            for (int i = lastIndex + 1; i < lastState.size(); i++) {
+            for (int i = lastIndex + 1; i < currentState.size(); i++) {
                 // Increment the total comparison
                 totalComparison++;
 
                 // Compare the current value with the minimum value
-                if (lastState.get(i) < lastState.get(minIndex)) {
+                if (currentState.get(i) < currentState.get(minIndex)) {
                     minIndex = i;
                 }
             }
 
-            nextState = new ArrayList<Integer>(lastState);
+            nextState = new ArrayList<Integer>(currentState);
             if (minIndex != lastIndex) {
                 // Swap the minimum value with the current value;
                 Integer temp = nextState.get(minIndex);
@@ -60,7 +61,7 @@ public class SelectionSort extends Algorithm {
             comparedElements = new Pair<Integer, Integer>(lastIndex, minIndex);
             isFinished = isFinished(nextState);
 
-            return new SortingContainer(lastState, nextState, comparedElements, nextIndex, "selection_sort",
+            return new SortingContainer(currentState, nextState, comparedElements, nextIndex, "selection_sort",
                     totalComparison, totalSwap, isSwapped, isFinished, true);
         }
 

@@ -133,5 +133,11 @@
 }
 
 #sorting-progress .bar1 {
-  -fx-fill: -mfx-sky;
+	-fx-fill: -mfx-sky;
+}
+
+#sorting-progress .track {
+  -fx-fill: -mfx-base;
+  -fx-stroke: -mfx-sky;
+  -fx-stroke-width: 1;
 }

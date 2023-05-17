@@ -1,10 +1,14 @@
 package binus.datastructure.algorithmvisualizer;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class DoublyLinkedList {
+    private Integer size = 0;
     public class Node {
-        SortingContainer item;
-        Node prev;
-        Node next;
+        private SortingContainer item;
+        private Node prev;
+        private Node next;
     
         public Node(SortingContainer item) {
             this.item = item;
@@ -45,6 +49,9 @@ public class DoublyLinkedList {
             // newNode becomes new tail
             tail = newNode;
         }
+
+        // Size increment
+        size++;
     }
 
     public Node getHead() {
@@ -53,6 +60,24 @@ public class DoublyLinkedList {
 
     public Node getTail() {
         return tail;
+    }
+
+    public Integer getTotalNode() {
+        return size;
+    }
+
+    public Integer getMaxValue() {
+        // Search for the maximum value from the head
+        Node current = head;
+        Integer maxValue = 0;
+        while (current != null) {
+            Integer currentValue = Collections.max(current.item.getNextState());
+            if (currentValue > maxValue) {
+                maxValue = currentValue;
+            }
+            current = current.next;
+        }
+        return maxValue;
     }
 
     public void display() {
