@@ -1,6 +1,5 @@
 package binus.datastructure.algorithmvisualizer;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 public class DoublyLinkedList {

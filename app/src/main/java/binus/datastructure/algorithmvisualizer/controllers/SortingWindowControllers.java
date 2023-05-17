@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.scene.chart.XYChart.Series;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Pair;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import binus.datastructure.algorithmvisualizer.DoublyLinkedList.Node;
@@ -27,9 +25,7 @@ public class SortingWindowControllers implements Initializable {
     private final AnchorPane contentPane;
     private final SortingModel sortingModel;
     private Node currentNode;
-    // private final ResizableCanvas sortingCanvas;
     private BarChart<String, Number> chart;
-    private ObservableList<Data<String, Number>> bars;
 
     @FXML
     private BorderPane sortingCanvasContainer;
@@ -97,7 +93,7 @@ public class SortingWindowControllers implements Initializable {
         chart.setCategoryGap(0);
 
         // Initialize bars
-        bars = FXCollections.observableArrayList();
+        ObservableList<Data<String, Number>> bars = FXCollections.observableArrayList();
         chart.getData().add(new Series<>(bars));
 
         // Set chart background color
@@ -168,22 +164,15 @@ public class SortingWindowControllers implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Add listener to the canvas container to resize the canvas when contentPane is
-        // resized
-        // And change the width of progress bar to contentPane width
+        // Add listener to the canvas container to resize the canvas
+        // when contentPane is resized and change the width of progress bar
+        // to contentPane width
         contentPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             updateSortingWindow();
-            // sortingCanvas.setWidth(newVal.doubleValue());
             sortingProgress.setPrefWidth(newVal.doubleValue());
         });
         contentPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             updateSortingWindow();
-            // sortingCanvas.setHeight(newVal.doubleValue() - 100); // 100 is the height of
-            // the control buttons
         });
-
-        // Set the sortingCanvas to the canvas container
-        // sortingCanvasContainer.getChildren().add(sortingCanvas);
-        // makeChart();
     }
 }

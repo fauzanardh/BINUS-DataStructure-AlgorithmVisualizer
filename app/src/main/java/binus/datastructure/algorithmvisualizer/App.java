@@ -3,53 +3,15 @@
  */
 package binus.datastructure.algorithmvisualizer;
 
-import java.util.ArrayList;
-
-import binus.datastructure.algorithmvisualizer.models.SortingModel;
 import binus.datastructure.algorithmvisualizer.views.AlgorithmVisualizer;
 
 public class App {
-    public String doSort() {
-        // Initialize the sorting model
-        SortingModel sortingModel = new SortingModel();
-
-        // Initialize the sorting elements
-        // sortingModel.initializeModelRandom(5);
-
-        // Initialize the sorting elements
-        sortingModel.initializeModel(new ArrayList<>() {
-            {
-                add(4);
-                add(0);
-                add(1);
-                add(3);
-                add(3);
-            }
-        });
-
-        // Perform sorting until finished
-        try {
-            while (!sortingModel.isFinished()) {
-                sortingModel.step("bubble_sort");
-            }
-        } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
-
-        // Print the result
-        sortingModel.getData().display();
-
-        return "Finished";
-    }
-
-    public String launchApplication(String[] args){
+    public void launchApplication(String[] args) {
         // Launch the JavaFX application
         AlgorithmVisualizer.main(args);
-
-        return "Finished";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().launchApplication(args));
+        new App().launchApplication(args);
     }
 }
