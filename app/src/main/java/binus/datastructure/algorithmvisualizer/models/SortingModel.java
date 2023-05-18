@@ -102,6 +102,7 @@ public class SortingModel {
         // Add the last step to the data
         // because the last step is not added when the algorithm is finished
         SortingContainer currenSortingContainer = this.data.getTail().getItem();
+        currenSortingContainer.setIsFinished(false);
         SortingContainer lastStep = new SortingContainer(
                 currenSortingContainer.getNextState(),
                 currenSortingContainer.getNextState(),
@@ -114,7 +115,5 @@ public class SortingModel {
                 currenSortingContainer.getIsSwapped(),
                 true);
         this.data.addNode(lastStep);
-
-        System.out.println(this.data.getTail().getItem());
     }
 }

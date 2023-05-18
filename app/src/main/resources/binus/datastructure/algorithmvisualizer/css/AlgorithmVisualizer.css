@@ -141,3 +141,9 @@
   -fx-stroke: -mfx-sky;
   -fx-stroke-width: 1;
 }
+
+#stats {
+  -fx-text-fill: -mfx-text;
+  -fx-font-family: "Open Sans Bold";
+  -fx-font-size: 12;
+}

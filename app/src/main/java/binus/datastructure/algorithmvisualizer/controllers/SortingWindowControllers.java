@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,11 +15,14 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
+import binus.datastructure.algorithmvisualizer.SortingContainer;
 import binus.datastructure.algorithmvisualizer.DoublyLinkedList.Node;
 import binus.datastructure.algorithmvisualizer.models.SortingModel;
 
@@ -28,13 +33,16 @@ public class SortingWindowControllers implements Initializable {
     private BarChart<String, Number> chart;
 
     @FXML
+    private Label statsLabel;
+
+    @FXML
     private BorderPane sortingCanvasContainer;
 
     @FXML
     private AnchorPane stepBackwardContainer;
 
     @FXML
-    private AnchorPane playPauseContainer;
+    private AnchorPane playContainer;
 
     @FXML
     private AnchorPane stepForwardContainer;
@@ -51,8 +59,8 @@ public class SortingWindowControllers implements Initializable {
         return stepBackwardContainer;
     }
 
-    public AnchorPane getPlayPauseContainer() {
-        return playPauseContainer;
+    public AnchorPane getPlayContainer() {
+        return playContainer;
     }
 
     public AnchorPane getStepForwardContainer() {
@@ -63,7 +71,7 @@ public class SortingWindowControllers implements Initializable {
         this.currentNode = currentNode;
     }
 
-    public void makeChart() {
+    public void updateChart() {
         // Data
         if (currentNode == null)
             return;
@@ -101,11 +109,14 @@ public class SortingWindowControllers implements Initializable {
 
         // Add data to bars
         for (int i = 0; i < data.size(); i++) {
+            // Create data object
             Data<String, Number> dataObject = new Data<>(String.valueOf(i + 1), data.get(i));
+            // Add data object to bars
             bars.add(dataObject);
+            // If the bar is one of the compared elements, set the color to red
             if (comparedElements.contains(i))
                 dataObject.getNode().setStyle("-fx-bar-fill: #f38ba8;");
-            else
+            else // Else, set the color to teal
                 dataObject.getNode().setStyle("-fx-bar-fill: #91d7e3;");
         }
 
@@ -116,18 +127,60 @@ public class SortingWindowControllers implements Initializable {
     public void setStepHandler(MFXButton stepBackwardButton, MFXButton stepForwardButton) {
         stepForwardButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (currentNode != null) {
+                // Check if current node is the last node
                 if (currentNode.getNext() != null) {
+                    // Set current node to next node
                     currentNode = currentNode.getNext();
+                    // Update sorting window
                     updateSortingWindow();
                 }
             }
         });
         stepBackwardButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (currentNode != null) {
+                // Check if current node is the first node
                 if (currentNode.getPrev() != null) {
+                    // Set current node to previous node
                     currentNode = currentNode.getPrev();
+                    // Update sorting window
                     updateSortingWindow();
                 }
+            }
+        });
+    }
+
+    public void setPlayHandler(MFXButton playButton) {
+        playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (currentNode != null) {
+                // Get total "frames" left to play
+                Integer totalFrames = 0;
+                Node tempNode = currentNode;
+                while (tempNode != null) {
+                    totalFrames++;
+                    tempNode = tempNode.getNext();
+                }
+
+                // Calculate the correct duration for each frame
+                // so the animation will finish in 5 seconds.
+                // Save the duration in milliseconds
+                Double duration = 5000.0 / totalFrames;
+
+                // Create timeline to play the sorting animation
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(duration), tlEvent -> {
+                    // Check if current node is the last node
+                    if (currentNode.getNext() != null) {
+                        // Set current node to next node
+                        currentNode = currentNode.getNext();
+                        // Update sorting window
+                        updateSortingWindow();
+                    }
+                }));
+
+                // Set timeline cycle count
+                timeline.setCycleCount(totalFrames);
+
+                // Play timeline
+                timeline.play();
             }
         });
     }
@@ -149,7 +202,7 @@ public class SortingWindowControllers implements Initializable {
                 Integer totalNode = sortingModel.getData().getTotalNode();
 
                 // Calculate progress
-                Double progress = (double) currentIndex / totalNode;
+                Double progress = (double) (currentIndex + 1) / totalNode;
 
                 // Set progress
                 sortingProgress.setProgress(progress);
@@ -157,9 +210,32 @@ public class SortingWindowControllers implements Initializable {
         }
     }
 
+    public void updateStatsLabel() {
+        if (currentNode != null) {
+            if (currentNode.getItem() != null) {
+                SortingContainer sortingData = currentNode.getItem();
+                Integer comparedElemets1 = sortingData.getComparedElements().getKey();
+                Integer comparedElemets2 = sortingData.getComparedElements().getValue();
+
+                String stats = String.format(
+                        "Algorithm: %s\nCompared Element Index: %d/%d\nIs Swapped: %s\nTotal Swaps: %d\nTotal Comparisons: %d\nIs Finished: %s",
+                        sortingData.getAlgorithm(),
+                        comparedElemets1,
+                        comparedElemets2,
+                        sortingData.getIsSwapped() ? "Yes" : "No",
+                        sortingData.getTotalSwap(),
+                        sortingData.getTotalComparison(),
+                        sortingData.getIsFinished() ? "Yes" : "No");
+                statsLabel.setText(stats);
+                statsLabel.toFront();
+            }
+        }
+    }
+
     public void updateSortingWindow() {
-        makeChart();
+        updateChart();
         updateProgressBar();
+        updateStatsLabel();
     }
 
     @Override

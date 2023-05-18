@@ -79,6 +79,10 @@ public class SortingContainer {
         return this.isFinished;
     }
 
+    public void setIsFinished(Boolean isFinished) {
+        this.isFinished = isFinished;
+    }
+
     public String toString() {
         return String.format(
                 "lastState: %s, currentState: %s, comparedElements: %s, currentIndex: %s, algorithm: %s, totalComparison: %s, totalSwap: %s, isSwapped: %s, isFinished: %s, started: %s",

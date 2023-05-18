@@ -78,7 +78,7 @@ public class AlgorithmVisualizer extends Application {
         MFXIconWrapper playIconWrapper = new MFXIconWrapper("fas-play", 28, 28);
         MFXButton playButton = new MFXButton("", playIconWrapper);
         playButton.setId("default-button");
-        controllerSortingWindow.getPlayPauseContainer().getChildren().add(playButton);
+        controllerSortingWindow.getPlayContainer().getChildren().add(playButton);
         // Forward button
         MFXIconWrapper forwardIconWrapper = new MFXIconWrapper("fas-caret-right", 28, 28);
         MFXButton forwardButton = new MFXButton("", forwardIconWrapper);
@@ -87,6 +87,7 @@ public class AlgorithmVisualizer extends Application {
 
         // Setup controllers for the control buttons
         controllerSortingWindow.setStepHandler(backwardButton, forwardButton);
+        controllerSortingWindow.setPlayHandler(playButton);
 
         // Set the SortingWindow as the content of the AnchorPane
         contentPane.getChildren().setAll(rootSortingWindow);
