@@ -34,15 +34,15 @@ public class BubbleSort extends Algorithm {
                 nextState.set(lastIndex, nextState.get(lastIndex + 1));
                 nextState.set(lastIndex + 1, temp);
 
-                // Increment the total comparison
-                totalComparison++;
-
                 // Increment the total swap
                 totalSwap++;
 
                 // Set the swapped flag
                 isSwapped = true;
             }
+            
+            // Increment the total comparison
+            totalComparison++;
 
             // Set values for next step
             nextIndex = lastIndex + 1;
