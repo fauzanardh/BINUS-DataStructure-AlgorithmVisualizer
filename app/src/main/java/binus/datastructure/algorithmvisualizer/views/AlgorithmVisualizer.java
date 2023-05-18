@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -88,6 +89,22 @@ public class AlgorithmVisualizer extends Application {
         // Setup controllers for the control buttons
         controllerSortingWindow.setStepHandler(backwardButton, forwardButton);
         controllerSortingWindow.setPlayHandler(playButton);
+
+        // Add instruction to the `instructionLabel`
+        String instruction = String.format(
+            "Instructions:\n"
+            + "1. Select an algorithm from the dropdown menu.\n"
+            + "2a. Input the numbers you want to sort.\n"
+            + "2b. Click the randomize button.\n"
+            + "3. Click the Run button to visualize the algorithm.\n"
+        );
+        Label instructionLabel = controllerSortingWindow.getInstructionLabel();
+        instructionLabel.setText(instruction);
+        // Center the text to the contentPane
+        AnchorPane.setLeftAnchor(instructionLabel, (contentPane.getWidth() - instructionLabel.getWidth()) / 2);
+        // Set the instruction label pref width to the width of contentPane
+        instructionLabel.prefHeightProperty().bind(contentPane.heightProperty());
+        
 
         // Set the SortingWindow as the content of the AnchorPane
         contentPane.getChildren().setAll(rootSortingWindow);

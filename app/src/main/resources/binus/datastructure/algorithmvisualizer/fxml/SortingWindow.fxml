@@ -8,13 +8,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="binus.datastructure.algorithmvisualizer.controllers.SortingWindowControllers">
    <children>
       <Label id="stats" fx:id="statsLabel" />
       <VBox alignment="CENTER" stylesheets="@../css/AlgorithmVisualizer.css">
          <children>
-            <BorderPane fx:id="sortingCanvasContainer" />
+            <BorderPane fx:id="sortingGraphContainer">
+               <center>
+                  <Label id="instruction" fx:id="instructionLabel" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+               </center></BorderPane>
             <VBox alignment="CENTER" prefHeight="100.0" spacing="10.0">
                <children>
                   <MFXProgressBar id="sorting-progress" fx:id="sortingProgress" progress="0.0">

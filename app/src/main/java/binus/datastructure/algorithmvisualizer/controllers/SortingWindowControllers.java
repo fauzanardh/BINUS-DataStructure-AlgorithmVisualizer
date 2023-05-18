@@ -36,7 +36,10 @@ public class SortingWindowControllers implements Initializable {
     private Label statsLabel;
 
     @FXML
-    private BorderPane sortingCanvasContainer;
+    private Label instructionLabel;
+
+    @FXML
+    private BorderPane sortingGraphContainer;
 
     @FXML
     private AnchorPane stepBackwardContainer;
@@ -65,6 +68,10 @@ public class SortingWindowControllers implements Initializable {
 
     public AnchorPane getStepForwardContainer() {
         return stepForwardContainer;
+    }
+
+    public Label getInstructionLabel() {
+        return instructionLabel;
     }
 
     public void setCurrentNode(Node currentNode) {
@@ -121,7 +128,7 @@ public class SortingWindowControllers implements Initializable {
         }
 
         // Add chart to canvas container
-        sortingCanvasContainer.setCenter(chart);
+        sortingGraphContainer.setCenter(chart);
     }
 
     public void setStepHandler(MFXButton stepBackwardButton, MFXButton stepForwardButton) {

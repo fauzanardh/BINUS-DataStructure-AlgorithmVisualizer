@@ -147,3 +147,9 @@
   -fx-font-family: "Open Sans Bold";
   -fx-font-size: 12;
 }
+
+#instruction {
+  -fx-text-fill: -mfx-text;
+  -fx-font-family: "Open Sans Bold";
+  -fx-font-size: 16; 
+}
